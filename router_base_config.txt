@@ -1,0 +1,31 @@
+hostname TechNova-Router
+
+interface GigabitEthernet0/0/0
+ no ip address
+ ipv6 address 2001:DB8:10::1/64
+ description LAN Ontwikkelaars
+
+interface GigabitEthernet0/0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.240
+ ipv6 address 2001:DB8:10::1/64
+ description VLAN 10 – Ontwikkelaars
+
+interface GigabitEthernet0/0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.240
+ ipv6 address 2001:DB8:20::1/64
+ description VLAN 20 – Admin/HR
+
+ip domain-name technova.local
+crypto key generate rsa general-keys modulus 1024
+ip ssh version 2
+
+line con 0
+ password ********
+ login
+
+line vty 0 4
+ password ********
+ login
+ transport input ssh

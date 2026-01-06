@@ -1,0 +1,30 @@
+hostname TechNova-SW-DEV
+
+vlan 10
+ name ontwikkelaars
+
+vlan 20
+ name admin_HR
+
+interface range Fa0/1 - 12
+ switchport mode access
+ switchport access vlan 10
+ description DEV-PC’s
+
+interface Gig0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20
+ description Trunk naar router
+
+ip domain-name technova.local
+crypto key generate rsa general-keys modulus 1024
+ip ssh version 2
+
+line con 0
+ password ********
+ login
+
+line vty 0 4
+ password ********
+ login
+ transport input ssh
